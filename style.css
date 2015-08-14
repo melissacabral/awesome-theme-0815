@@ -19,21 +19,22 @@ Tags:gray, two-columns
 ==Breadcrumbs
 ==pagination
 ==Search Form
-==comment form
+==comment form	
 ==comments list
 ==sidebar and widget typography and layout
 ==post typography 
-==blockquotes 
+==blockquotes
 ==Gallery
-==Forms
+==Forms!
 ==tables
 ==Lists
 ==misc tags
 ==Calendar Widget
 ==custom post type - products 
-==Latest Products   
+==Latest Products  
 ==Contact info options box
 ==Media Queries
+
 */
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700);
 
@@ -67,8 +68,6 @@ body {
 	font-size:100%;
 	line-height:1.125em; /* 16×1.125=18 */
 	font-family: 'Source Sans Pro', Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-	
-	
 	
 }
 #wrapper{
@@ -1418,7 +1417,9 @@ body.single-product .post-meta span{
         opacity: 1;
         bottom:14px;
 }
-/*==Contact info options box*/
+/*
+==Contact info options box
+*/
 .contact-info{
 	display: none;
 }
