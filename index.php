@@ -31,7 +31,7 @@ if( is_front_page() ){
 				</a>
 			</h2>
 			<div class="entry-content">
-				<?php the_content(); ?>
+				<?php the_excerpt(); //first few words of the post ?>
 			</div>
 			<div class="postmeta"> 
 				<span class="author"> Posted by: <?php the_author(); ?></span>
