@@ -43,6 +43,20 @@ if( is_front_page() ){
 		</article><!-- end post -->
 
 		<?php endwhile; ?>
+
+		<div class="pagination">
+			<?php 
+			//archive pagination - use pagenavi if it is activated in plugins
+			if( function_exists('wp_pagenavi') ){
+				wp_pagenavi();
+			}else{
+				//fallback to default WP pagination
+				previous_posts_link( '&larr; Newer Posts' );  //newer
+				next_posts_link( 'Older Posts &rarr;' );      //older
+			}
+			?>
+		</div>
+
 	<?php else: ?>
 
 	<h2>Sorry, no posts found</h2>

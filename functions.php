@@ -32,13 +32,37 @@ function awesome_excerpt_length(){
 add_filter( 'excerpt_length', 'awesome_excerpt_length' );
 
 //fix the [...]
-
 function awesome_readmore(){
 	return ' <a href="' . get_permalink() . '" class="readmore">Read More</a>';
 }
 			// built in  		//custom 
 add_filter( 'excerpt_more', 'awesome_readmore' );
 
+//Register all menu areas
+function awesome_menus(){
+	register_nav_menus( array(
+		//code_name => 'Human Readable Name',
+		'main_nav' 	=> 'Main Navigation Area',
+		'utilities'	=> 'Utility Bar',
+	) );
+}
+add_action( 'init', 'awesome_menus' );
 
+
+/**
+ * Demo for my audits and will :)
+ */
+function awesome_script(){
+	wp_enqueue_script( 'jquery' );
+
+	//custom script
+	//1. register it	
+	$path = get_stylesheet_directory_uri() . '/js/custom.js';
+	//				handle , path , dependencies,  ver, in footer?   
+	wp_register_script( 'custom', $path , 'jquery', '1.0' , true );
+	//2. enqueue it
+	wp_enqueue_script( 'custom' );
+}
+add_action( 'wp_enqueue_scripts', 'awesome_script' );
 
 //no close PHP

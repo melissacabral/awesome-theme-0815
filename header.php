@@ -32,19 +32,22 @@
 				</a>
 			</h1>
 			<h2 class="site-description"> <?php bloginfo('description'); ?> </h2>
-			<nav>
-				<ul class="nav">
-					<?php wp_list_pages( array(
-						'depth' => 1,
-						'title_li' => '',
-						) ); ?>
-					</ul>
-				</nav>
+			
+			<?php wp_nav_menu( array(
+				'theme_location' 	=> 'main_nav',  //defined in functions.php
+				'container'			=> 'nav',       //wrap with <nav></nav>
+				'menu_class'		=> 'nav', 		//<ul class="nav">
+				'fallback_cb'		=> '',			//no menu if no menu selected
+			) ); ?>
+
 		</div><!-- end .top-bar -->
 		
-		<ul class="utilities">
-			<li><a href="/contact-us/">Contact Us</a></li>
-			<li><a href="/location/">Location</a></li>
-		</ul>
+		<?php wp_nav_menu( array(
+				'theme_location' 	=> 'utilities', 
+				'container' 		=> false,   	//no container
+				'menu_class'		=> 'utilities',
+				'fallback_cb'		=> '',		   //no menu if no menu selected
+		) ); ?>
+
 		<?php get_search_form(); //includes searchform.php if it exists, if not, this outputs the default search bar ?>	
 	</header>

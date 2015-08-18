@@ -29,6 +29,13 @@
 			</div><!-- end postmeta -->			
 		</article><!-- end post -->
 
+		<div class="pagination">
+			<?php 
+			//single post pagination
+			next_post_link( '%link', '&larr; %title' ); 		//newer post
+			previous_post_link( '%link', '%title &rarr;' ); 	//older_post ?>
+		</div>
+
 		<?php comments_template(); ?>
 
 		<?php endwhile; ?>
