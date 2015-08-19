@@ -1,5 +1,9 @@
 	<footer class="clearfix" id="colophon" role="contentinfo">
-		Footer stuff here
+		
+		<?php 
+		//display a widget area registered in functions.php
+		dynamic_sidebar( 'footer-widgets' ); 
+		?>
 		
 	</footer><!-- end footer -->
 </div><!-- closes #wrapper opened in header.php -->

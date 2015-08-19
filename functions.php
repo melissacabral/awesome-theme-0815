@@ -1,4 +1,7 @@
 <?php
+//required - make titles more SEO friendly. use wp-title() in header
+add_theme_support( 'title-tag' );
+
 //activate sleeping wordpress features
 add_theme_support( 'post-thumbnails' );
 
@@ -22,6 +25,9 @@ add_theme_support( 'automatic-feed-links' );
 //add any custom image sizes you need for banners, ads, etc
 //					name 	 width  height  crop?
 add_image_size( 'big-banner', 1065, 250, true );
+
+//required for auto embeds. set to the width of your content column
+if ( ! isset( $content_width ) ) $content_width = 680;
 
 //Make excerpts better
 //custom length (number of words)
@@ -64,5 +70,57 @@ function awesome_script(){
 	wp_enqueue_script( 'custom' );
 }
 add_action( 'wp_enqueue_scripts', 'awesome_script' );
+
+
+//Create all widget Areas
+function awesome_widget_areas(){
+	register_sidebar( array(
+		'name' 		=> 'Blog Sidebar', 	//human readable. will show in admin panel
+		'id'		=> 'blog-sidebar', 	//code-friendly. use when displaying the area
+		'description'=> 'These widgets appear next to the blog archives',
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget' 	=> '</section>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+	register_sidebar( array(
+		'name' 		=> 'Footer Widgets', 	//human readable. will show in admin panel
+		'id'		=> 'footer-widgets', 	//code-friendly. use when displaying the area
+		'description'=> 'These widgets appear at the bottom of all pages',
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget' 	=> '</section>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+	register_sidebar( array(
+		'name' 		=> 'Page Sidebar', 	//human readable. will show in admin panel
+		'id'		=> 'page-sidebar', 	//code-friendly. use when displaying the area
+		'description'=> 'These widgets appear next to most pages',
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget' 	=> '</section>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+	register_sidebar( array(
+		'name' 		=> 'Home Widgets', 	//human readable. will show in admin panel
+		'id'		=> 'home-widgets', 	//code-friendly. use when displaying the area
+		'description'=> 'These widgets appear on the static home page',
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget' 	=> '</section>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+}
+add_action( 'widgets_init', 'awesome_widget_areas' );
+
+
+//make better UX when replying to comments. 
+//the form will jump up to the comment being replied to
+function awesome_comment_script(){
+	if ( is_singular() ){
+		 wp_enqueue_script( "comment-reply" );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'awesome_comment_script' );
 
 //no close PHP
