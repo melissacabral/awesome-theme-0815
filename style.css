@@ -1459,9 +1459,9 @@ body.single-product .post-meta span{
 .tax-feature .entry-content{
 	margin-left:0;
 }
-.post-type-archive-product .thumb,
-.tax-brand .thumb,
-.tax-feature .thumb{
+.post-type-archive-product .wp-post-image,
+.tax-brand .wp-post-image,
+.tax-feature .wp-post-image{
 	float:none;
 	margin:0;
 }
