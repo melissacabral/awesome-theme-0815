@@ -4,53 +4,55 @@
 
 	<?php //THE LOOP
 		if( have_posts() ): ?>
+
+		<h2 class="archive-title">Products that are <?php single_cat_title(); //single term title ?></h2>
+
 		<?php while( have_posts() ): the_post(); ?>
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 			<?php 
 			//display the featured image at a small size. 
 			//don't forget to activate post-thumbnails in functions.php
-			the_post_thumbnail('large', array( 'class' => 'product-image' )); ?>
+			the_post_thumbnail('thumbnail'); ?>
 
 			<h2 class="entry-title"> 
 				<a href="<?php the_permalink(); ?>"> 
 					<?php the_title(); ?> 
 				</a>
 			</h2>
-
-			<?php 
-			//show the brand of this product
-			the_terms( $post->ID, 'brand', '<h3>Brand: ', '<br>', '</h3>' ); ?>
-
-			<?php 
-			//show all the features of this product
-			the_terms( $post->ID, 'feature', '<ul><li>', '</li><li>', '</li></ul>' ); ?>
-
 			<div class="entry-content">
-				<?php 
-				//show all custom fields in a list
-				the_meta(); ?>
+				<?php the_excerpt(); //first few words of the post ?>
 
-				<?php the_content(); ?>
+				<?php //show the price custom field (meta)
+										//post id,  key,  single?
+				 $price = get_post_meta( $post->ID, 'price', true ); 
+				 if($price){
+				 	//display a cute price tag
+				 	?>
+				 	<span class="product-price"><?php echo $price; ?></span>
+				 	<?php
+				 }
+				 ?>
 
-				 <?php wp_link_pages( array(
-				 	'before' => '<div class="pagination">Keep reading this post:',
-				 	'after' => '</div>',
-				 ) ); ?>
 			</div>
 					
 		</article><!-- end post -->
 
+		<?php endwhile; ?>
+
 		<div class="pagination">
 			<?php 
-			//single post pagination
-			next_post_link( '%link', '&larr; %title' ); 		//newer post
-			previous_post_link( '%link', '%title &rarr;' ); 	//older_post ?>
+			//archive pagination - use pagenavi if it is activated in plugins
+			if( function_exists('wp_pagenavi') ){
+				wp_pagenavi();
+			}else{
+				//fallback to default WP pagination
+				previous_posts_link( '&larr; Newer Posts' );  //newer
+				next_posts_link( 'Older Posts &rarr;' );      //older
+			}
+			?>
 		</div>
 
-		<?php comments_template(); ?>
-
-		<?php endwhile; ?>
 	<?php else: ?>
 
 	<h2>Sorry, no posts found</h2>
