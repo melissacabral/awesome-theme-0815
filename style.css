@@ -1622,3 +1622,39 @@ body.single-product .post-meta span{
 		float:left;
 	}
 }
+
+/* 
+==Products list additions 
+*/
+.product-list li{
+	float: left;
+	width: 150px;
+	margin: 0 20px 0 0;
+	position: relative;
+	overflow: hidden;
+}
+.product-list .wp-post-image{
+	float: none;
+}
+/*hover description*/
+.product-list .product-info{
+	position: absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:70%;
+	overflow: hidden;
+	background-color: #2298A9;
+	text-align: center;
+	padding:1em;
+	opacity: 0;
+	-webkit-transition: all 200ms ease-in;
+	-moz-transition: all 200ms ease-in;
+	-ms-transition: all 200ms ease-in;
+	-o-transition: all 200ms ease-in;
+	transition: all 200ms ease-in;
+}
+.product-list li:hover .product-info{
+	opacity:.85;
+	bottom:16px;
+}

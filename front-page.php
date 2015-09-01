@@ -44,6 +44,41 @@
 
 	<?php endif;  //end THE LOOP ?>
 
+
+	<section id="featured-content" class="clearfix">
+		<?php 
+		//custom query to get the most recent 6 products
+		$product_query = new WP_Query( array(
+			'post_type' 		=> 'product', 	//any registered post type
+			'posts_per_page' 	=> 6,			//number of posts to get
+			'nopaging'			=> true,		//only get the first page
+		) ); 
+
+		//custom loop to display results
+		if( $product_query->have_posts() ){
+		?>
+		<ul class="product-list">
+			<?php while( $product_query->have_posts() ){ 
+						$product_query->the_post();
+			?>
+			<li>
+				<a href="<?php the_permalink(); ?>">
+					<?php the_post_thumbnail( 'thumbnail'); ?>
+				</a>
+				<div class="product-info">
+					<h3><?php the_title(); ?></h3>
+					<p><?php the_excerpt(); ?></p>
+					<p><?php echo get_post_meta( $post->ID, 'price', true ); ?></p>
+				</div>
+			</li>
+			<?php } //end while ?>
+		</ul>
+		<?php } //end of custom loop
+
+		//done with custom query - reset the $post object
+		wp_reset_postdata(); ?>		
+	</section>
+
 </main><!-- end #content -->
 
 <?php get_sidebar('frontpage'); //include sidebar-frontpage.php ?>
