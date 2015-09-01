@@ -23,16 +23,7 @@
 			<div class="entry-content">
 				<?php the_excerpt(); //first few words of the post ?>
 
-				<?php //show the price custom field (meta)
-										//post id,  key,  single?
-				 $price = get_post_meta( $post->ID, 'price', true ); 
-				 if($price){
-				 	//display a cute price tag
-				 	?>
-				 	<span class="product-price"><?php echo $price; ?></span>
-				 	<?php
-				 }
-				 ?>
+				<?php awesome_pricetag(); ?>
 
 			</div>
 					

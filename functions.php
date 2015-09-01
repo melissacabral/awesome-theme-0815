@@ -123,4 +123,51 @@ function awesome_comment_script(){
 }
 add_action( 'wp_enqueue_scripts', 'awesome_comment_script' );
 
+
+//Helper function to display a list of any number of products
+function awesome_products( $number = 5 , $title = 'Products:' ){
+	//custom query to get the most recent 6 products
+	$product_query = new WP_Query( array(
+		'post_type' 		=> 'product', 	//any registered post type
+		'posts_per_page' 	=> $number,		//number of posts to get
+	) ); 
+
+	//custom loop to display results
+	if( $product_query->have_posts() ){
+	?>
+	<h2><?php echo $title; ?></h2>
+	<ul class="product-list">
+		<?php while( $product_query->have_posts() ){ 
+					$product_query->the_post();
+		?>
+		<li>
+			<a href="<?php the_permalink(); ?>">
+				<?php the_post_thumbnail( 'thumbnail'); ?>
+			</a>
+			<div class="product-info">
+				<h3><?php the_title(); ?></h3>
+				<p><?php the_excerpt(); ?></p>
+				<?php awesome_pricetag(); ?>
+			</div>
+		</li>
+		<?php } //end while ?>
+	</ul>
+	<?php } //end of custom loop
+
+	//done with custom query - reset the $post object
+	wp_reset_postdata();
+}
+
+
+//helper function to display the price of any product
+function awesome_pricetag(){
+	$price = get_post_meta( get_the_id(), 'price', true ); 
+	if($price){
+		//display a cute price tag
+		?>
+		<span class="product-price"><?php echo $price; ?></span>
+		<?php
+	}
+}
+
 //no close PHP
